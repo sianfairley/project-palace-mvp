@@ -8,16 +8,54 @@ router.get("/", function (req, res, next) {
   res.send({ title: "Express" });
 });
 
-// GET all data
-router.get("/projects", function (req, res, next) {
-  db("SELECT * FROM projects")
+//Reused in different routes to show all projects
+function selectAllItems(req, res) {
+  db("SELECT * FROM projects ORDER BY id ASC;")
     .then((results) => {
       res.send(results.data);
     })
     .catch((err) => res.status(500).send(err));
+}
+
+router.get("/projects", (req, res) => {
+  // Send back the full list of items
+  selectAllItems(req, res);
 });
 
 //GET project by ID
+router.get("/projects/:id", async (req, res) => {
+  try {
+    let result = await db(`SELECT * FROM projects WHERE id = ${req.params.id}`);
+
+    res.send(result.data[0]);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 //POST new project
+router.post("/projects", async (req, res) => {
+  //get the info of the new item from req.body
+  let newProject = req.body;
+  try {
+    await db(
+      `INSERT INTO projects (projectname, type, materials, description, image, complete, favorite) VALUES ("${newProject.projectname}", "${newProject.type}", "${newProject.materials}", "${newProject.description}", "${newProject.image}", ${newProject.complete}, ${newProject.favorite})`
+    );
+    selectAllItems(req, res);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//DELETE project
+router.delete("/projects/:id", async (req, res) => {
+  // the id of the item to be deleted is available in req.params
+  try {
+    await db(`DELETE FROM projects WHERE id = ${req.params.id};`);
+    selectAllItems(req, res);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = router;
