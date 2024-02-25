@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.image-select {
+  height: 150px;
+  width: 150px;
+  border-radius: 20px;
+}
