@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
+import Gallery from "./components/Gallery.jsx";
+
 import "./App.css";
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
     <div>
       <NavBar handlePageView={setPageView} />
       {pageView === "home" && <Home handlePageView={setPageView} />}
-      {pageView === "create" && <Create handlePageView={setPageView} />}
+      {pageView === "create" && (
+        <Create handlePageView={setPageView} setProjects={setProjects} />
+      )}
       {pageView === "gallery" && (
         <Gallery handlePageView={setPageView} projects={projects} />
       )}
@@ -79,19 +83,69 @@ function Home({ handlePageView }) {
   );
 }
 
-//Form - name, type, materials, description. Image - url OR new select option for preselected images
-function Create() {
+function Create({ setProjects }) {
+  const [input, setInput] = useState({
+    projectname: "",
+    type: "",
+    materials: "",
+    description: "",
+    image: "",
+    complete: false,
+    favorite: false,
+  });
+
+  //Gets input
+  const handleChange = (e) => {
+    setInput((input) => ({ ...input, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmitProject = (event) => {
+    event.preventDefault();
+    addProject();
+  };
+
+  // POST add new project
+  const addProject = () => {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    };
+
+    //
+    fetch("/api/projects", options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProjects(data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmitProject}>
         <h2>Create a new project</h2>
         <div>
           <h3>1. Give your project a name</h3>
-          <input type="text" label="project name"></input>
+          <input
+            type="text"
+            label="project name"
+            value={input.projectname}
+            name="projectname"
+            onChange={handleChange}
+          ></input>
         </div>
         <div>
           <h3>2. Choose a craft</h3>
-          <select label="type" value="type">
+          <select
+            label="type"
+            value={input.type}
+            onChange={handleChange}
+            name="type"
+          >
             <option>Paper craft</option>
             <option>Knitting</option>
             <option>Sewing</option>
@@ -102,69 +156,67 @@ function Create() {
           </select>
         </div>
         <div>
-          <h3>3. Describe your project</h3>
-          <input type="text" label="description"></input>
+          <h3>3. What are your materials?</h3>
+          <input
+            type="text"
+            label="materials"
+            name="materials"
+            value={input.materials}
+            onChange={handleChange}
+          ></input>
+        </div>
+        <div>
+          <h3>4. Describe your project</h3>
+          <input
+            type="text"
+            label="description"
+            name="description"
+            value={input.description}
+            onChange={handleChange}
+          ></input>
         </div>
         {/* Is it possible to map through preset images and insert as component? */}
         <div>
-          <h3>4. Add an image or choose one</h3>
-          <input type="text" label="image url" placeholder="image url"></input>
-
-          <label>
-            <input type="radio" id="image1" name="presetImage" />
-            <img
-              className="image-select"
-              src="src/assets/knitting.jpg"
-              alt="knitting"
-            />
-          </label>
-
-          <label>
-            <input
-              type="radio"
-              id="image2"
-              name="presetImage"
-              // value={src/assets/scrapbook.jpg}
-            />
-            <img
-              className="image-select"
-              src="src/assets/scrapbook.jpg"
-              alt="Scrapbooking"
-            />
-          </label>
+          <h3>5. Add an image</h3>
+          <p>
+            You can also add a photo or your project later when you have
+            finished.
+          </p>
+          <input
+            type="text"
+            label="image url"
+            placeholder="image url"
+            name="image"
+            value={input.image}
+            onChange={handleChange}
+          ></input>
+          <h3>or choose one</h3>
+          {/* //Make sure no buttons are selected on load */}
+          {/* <label>
+              <input type="radio" id="image1" name="presetImage" />
+              <img
+                className="image-select"
+                src="src/assets/knitting.jpg"
+                alt="knitting"
+              />
+            </label>
+  
+            <label>
+              <input
+                type="radio"
+                id="image2"
+                name="presetImage"
+                // value={src/assets/scrapbook.jpg}
+              />
+              <img
+                className="image-select"
+                src="src/assets/scrapbook.jpg"
+                alt="Scrapbooking"
+              />
+            </label> */}
         </div>
+        <Button>Create!</Button>
       </form>
-    </>
-  );
-}
-
-//Split project into separate component. Pass projects as prop or use component composition?
-function Gallery({ projects }) {
-  return (
-    <div>
-      View projects here
-      <AllProjects projects={projects} />
-    </div>
-  );
-}
-
-//Project component - shows image and name. onClick shows all info. Accepts projects as a prop from gallery
-function AllProjects({ projects }) {
-  return (
-    <ul>
-      {projects.map((project) => (
-        // Creates a project from each item in the array and gives it a key
-        <ProjectCard project={project} key={project.id} />
-      ))}
-    </ul>
-  );
-}
-
-function ProjectCard({ project }) {
-  return (
-    <>
-      <h4>{project.projectname}</h4>
-      <img src={project.image} alt={project.name} />
     </>
   );
 }
@@ -173,6 +225,8 @@ function ProjectCard({ project }) {
 function Ideas() {
   return <div>Get ideas here</div>;
 }
+
+//selectedProject - get by id. Set value with the project info. on submit, use UPDATE/PUT
 
 //showImage component -
 export default App;

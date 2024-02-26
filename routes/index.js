@@ -58,4 +58,13 @@ router.delete("/projects/:id", async (req, res) => {
   }
 });
 
+//UPDATE favourite - get project by id
+// router.put("/projects/:id", async (req, res) => {
+//   try {
+//     await db(``);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+
 module.exports = router;
