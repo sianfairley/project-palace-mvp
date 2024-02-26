@@ -7,10 +7,10 @@ function App() {
   const [pageView, setPageView] = useState("home");
   const [projects, setProjects] = useState([]);
 
-  //Use GET to fetch all projects and render in Gallery on load
+  //Use GET to fetch all projects, setProjects will update projects state and render in Gallery on load
   useEffect(() => {
     //GET all items from database
-    fetch("/projects")
+    fetch("/api/projects")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -29,13 +29,15 @@ function App() {
       });
   }, []);
 
-  // Conditional rendering to set the view - useEffect loads landing view by default
+  // Conditional rendering to set the view - home view renders by default in useState
   return (
     <div>
       <NavBar handlePageView={setPageView} />
       {pageView === "home" && <Home handlePageView={setPageView} />}
       {pageView === "create" && <Create handlePageView={setPageView} />}
-      {pageView === "gallery" && <Gallery handlePageView={setPageView} />}
+      {pageView === "gallery" && (
+        <Gallery handlePageView={setPageView} projects={projects} />
+      )}
       {pageView === "ideas" && <Ideas handlePageView={setPageView} />}
     </div>
   );
@@ -71,13 +73,13 @@ function Home({ handlePageView }) {
         <Button onClick={() => handlePageView("gallery")}>My Projects</Button>
       </div>
       <div>
-        <Button onClick={() => handlePageView("create")}>Get Ideas</Button>
+        <Button onClick={() => handlePageView("ideas")}>Get Ideas</Button>
       </div>
     </div>
   );
 }
 
-//Form - name, type, materials, description. Image - url OR new select option for preselected images?
+//Form - name, type, materials, description. Image - url OR new select option for preselected images
 function Create() {
   return (
     <>
@@ -103,17 +105,13 @@ function Create() {
           <h3>3. Describe your project</h3>
           <input type="text" label="description"></input>
         </div>
-        {/* Map through preset images and insert as component? */}
+        {/* Is it possible to map through preset images and insert as component? */}
         <div>
           <h3>4. Add an image or choose one</h3>
           <input type="text" label="image url" placeholder="image url"></input>
+
           <label>
-            <input
-              type="radio"
-              id="image1"
-              name="presetImage"
-              // value="src/assets/knitting.jpg"
-            />
+            <input type="radio" id="image1" name="presetImage" />
             <img
               className="image-select"
               src="src/assets/knitting.jpg"
@@ -140,17 +138,41 @@ function Create() {
   );
 }
 
-//Split project into separate component
-function Gallery() {
-  return <div>View projects here</div>;
+//Split project into separate component. Pass projects as prop or use component composition?
+function Gallery({ projects }) {
+  return (
+    <div>
+      View projects here
+      <AllProjects projects={projects} />
+    </div>
+  );
+}
+
+//Project component - shows image and name. onClick shows all info. Accepts projects as a prop from gallery
+function AllProjects({ projects }) {
+  return (
+    <ul>
+      {projects.map((project) => (
+        // Creates a project from each item in the array and gives it a key
+        <ProjectCard project={project} key={project.id} />
+      ))}
+    </ul>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <>
+      <h4>{project.projectname}</h4>
+      <img src={project.image} alt={project.name} />
+    </>
+  );
 }
 
 //Youtube API
 function Ideas() {
   return <div>Get ideas here</div>;
 }
-
-//Project component - shows image and name. onClick shows all info
 
 //showImage component -
 export default App;
