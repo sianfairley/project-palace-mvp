@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 import { MdFavorite } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { MdEditOff } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -32,6 +35,8 @@ function AllProjects({ projects, setProjects }) {
 
 function ProjectCard({ project, setProjects }) {
   //Fetch to toggle favorite on front and backend
+  const [editBox, setEditBox] = useState("false");
+
   const toggleFavorite = () => {
     let options = {
       method: "PUT",
@@ -48,6 +53,11 @@ function ProjectCard({ project, setProjects }) {
       })
       .catch((error) => console.log(error));
   };
+
+  const toggleEditBox = () => {
+    setEditBox(!editBox);
+  };
+
   return (
     <>
       <h4>{project.projectname}</h4>
@@ -60,70 +70,65 @@ function ProjectCard({ project, setProjects }) {
         <button onClick={(e) => toggleFavorite(project.id)}>
           {project.favorite ? <MdFavorite /> : <MdFavoriteBorder />}
         </button>
-        <ButtonTriggerDeleteConfirmation />
-        <button>
-          <MdEdit />
+        <DeleteProjectButton project={project} setProjects={setProjects} />
+        <button onClick={toggleEditBox}>
+          {editBox ? <MdEditOff /> : <MdEdit />}
         </button>
+        {editBox ? (
+          <EditBox project={project} setProjects={setProjects} />
+        ) : null}
       </div>
     </>
   );
 }
 
-function ButtonTriggerDeleteConfirmation() {
+// Form takes id of selected button
+function EditBox({ project, setProjects }) {
+  return (
+    <form>
+      <h6>Form to edit {project.projectname}</h6>
+      <input
+        name="projectname"
+        value={project.projectname}
+        placeholder={project.projectname}
+        label="name"
+      ></input>
+      <input type="text" name="materials" value={project.materials}></input>
+      <input type="text" name="description" value={project.description}></input>
+      <input type="text" name="image" value={project.image}></input>
+    </form>
+  );
+}
+
+//DELETE
+function DeleteProjectButton({ project, setProjects }) {
+  const handleDelete = () => {
+    let options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(`/api/projects/${project.id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProjects(data);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <button
       type="button"
       className="btn btn-primary"
       data-toggle="modal"
       data-target="#deletemodal"
+      onClick={(e) => handleDelete(project.id)}
     >
       <TiDelete />
     </button>
   );
 }
-
-// function DeleteConfirmationModal() {
-//   return (
-//     <div
-//       className="modal fade"
-//       id="deletemodal"
-//       tabindex="-1"
-//       role="dialog"
-//       aria-labelledby="exampleModalLabel"
-//       aria-hidden="true"
-//     >
-//       <div className="modal-dialog" role="document">
-//         <div className="modal-content">
-//           <div className="modal-header">
-//             <h5 className="modal-title" id="exampleModalLabel">
-//               Delete this project?
-//             </h5>
-//             <button
-//               type="button"
-//               className="close"
-//               data-dismiss="modal"
-//               aria-label="Close"
-//             >
-//               <span aria-hidden="true">&times;</span>
-//             </button>
-//           </div>
-//           <div className="modal-body">...</div>
-//           <div className="modal-footer">
-//             <button
-//               type="button"
-//               className="btn btn-secondary"
-//               data-dismiss="modal"
-//             >
-//               Close
-//             </button>
-//             <button type="button" className="btn btn-primary">
-//               Save changes
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 
 export default Gallery;
