@@ -26,7 +26,6 @@ router.get("/projects", (req, res) => {
 router.get("/projects/:id", async (req, res) => {
   try {
     let result = await db(`SELECT * FROM projects WHERE id = ${req.params.id}`);
-
     res.send(result.data[0]);
   } catch (err) {
     res.status(500).send(err);
@@ -58,13 +57,16 @@ router.delete("/projects/:id", async (req, res) => {
   }
 });
 
-//UPDATE favourite - get project by id
-// router.put("/projects/:id", async (req, res) => {
-//   try {
-//     await db(``);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
+// UPDATE favourite - get project by id, toggle fav
+router.put(`/projects/:id`, async (req, res) => {
+  try {
+    await db(
+      `UPDATE projects SET favorite = !favorite WHERE id=${req.params.id};`
+    );
+    selectAllItems(req, res);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;

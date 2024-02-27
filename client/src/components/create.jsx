@@ -47,7 +47,7 @@ function Create({ setProjects }) {
       <form onSubmit={handleSubmitProject}>
         <h2>Create a new project</h2>
         <div>
-          <h3>1. Give your project a name</h3>
+          <h5>1. Give your project a name</h5>
           <input
             type="text"
             label="project name"
@@ -57,7 +57,7 @@ function Create({ setProjects }) {
           ></input>
         </div>
         <div>
-          <h3>2. Choose a craft</h3>
+          <h5>2. Choose a craft</h5>
           <select
             label="type"
             value={input.type}
@@ -74,7 +74,7 @@ function Create({ setProjects }) {
           </select>
         </div>
         <div>
-          <h3>3. What are your materials?</h3>
+          <h5>3. What are your materials?</h5>
           <input
             type="text"
             label="materials"
@@ -84,7 +84,7 @@ function Create({ setProjects }) {
           ></input>
         </div>
         <div>
-          <h3>4. Describe your project</h3>
+          <h5>4. Describe your project</h5>
           <input
             type="text"
             label="description"
@@ -95,7 +95,7 @@ function Create({ setProjects }) {
         </div>
         {/* Is it possible to map through preset images and insert as component? */}
         <div>
-          <h3>5. Add an image</h3>
+          <h5>5. Add an image</h5>
           <p>
             You can also add a photo or your project later when you have
             finished.
@@ -108,7 +108,7 @@ function Create({ setProjects }) {
             value={input.image}
             onChange={handleChange}
           ></input>
-          <h3>or choose one</h3>
+          <h5>or choose one</h5>
           {/* //Make sure no buttons are selected on load */}
           {/* <label>
                 <input type="radio" id="image1" name="presetImage" />
