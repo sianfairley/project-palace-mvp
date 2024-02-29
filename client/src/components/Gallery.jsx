@@ -4,6 +4,9 @@ import { MdFavorite } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { MdEditOff } from "react-icons/md";
+import { FaRegCircleCheck } from "react-icons/fa6";
+import { FaRegCircle } from "react-icons/fa";
+
 import { TiDelete } from "react-icons/ti";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -31,6 +34,23 @@ function ProjectCard({ project, setProjects }) {
   const [editBox, setEditBox] = useState(false);
 
   const toggleFavorite = () => {
+    let options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(`/api/projects/${project.id}`, options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProjects(data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const toggleComplete = () => {
     let options = {
       method: "PUT",
       headers: {
@@ -103,6 +123,9 @@ function ProjectCard({ project, setProjects }) {
       <div>
         <button onClick={(e) => toggleFavorite(project.id)}>
           {project.favorite ? <MdFavorite /> : <MdFavoriteBorder />}
+        </button>
+        <button onClick={(e) => toggleComplete(project.id)}>
+          {project.complete ? <FaRegCircleCheck /> : <FaRegCircle />}
         </button>
         <DeleteProjectButton project={project} setProjects={setProjects} />
         <button onClick={toggleEditBox}>
