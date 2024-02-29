@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
+import { Routes, Route, Link, NavLink } from "react-router-dom";
 // import Button from "./src/App.jsx";
 
 function Create({ setProjects }) {
@@ -11,6 +13,7 @@ function Create({ setProjects }) {
     complete: false,
     favorite: false,
   });
+  const [viewGallery, setViewGallery] = useState(false);
 
   //Gets input
   const handleChange = (e) => {
@@ -20,6 +23,7 @@ function Create({ setProjects }) {
   const handleSubmitProject = (event) => {
     event.preventDefault();
     addProject();
+    setViewGallery(true);
   };
 
   // POST add new project
@@ -64,8 +68,10 @@ function Create({ setProjects }) {
             onChange={handleChange}
             name="type"
           >
+            <option>-Choose a type-</option>
             <option>Paper craft</option>
             <option>Knitting</option>
+            <option>Crochet</option>
             <option>Sewing</option>
             <option>Painting and drawing</option>
             <option>Collage</option>
@@ -108,7 +114,7 @@ function Create({ setProjects }) {
             value={input.image}
             onChange={handleChange}
           ></input>
-          <h5>or choose one</h5>
+          {/* <h5>or choose one</h5> */}
           {/* //Make sure no buttons are selected on load */}
           {/* <label>
                 <input type="radio" id="image1" name="presetImage" />
@@ -133,9 +139,21 @@ function Create({ setProjects }) {
                 />
               </label> */}
         </div>
-        <button>Create!</button>
+        <button className="btn btn-light">Create!</button>
       </form>
+      {viewGallery ? <OnSubmissionViewGallery /> : null}
     </>
+  );
+}
+
+function OnSubmissionViewGallery() {
+  return (
+    <div>
+      <p>Great work!</p>
+      <button>
+        <NavLink to="/gallery">See my projects</NavLink>
+      </button>
+    </div>
   );
 }
 

@@ -12,30 +12,23 @@ function Gallery({ projects, setProjects }) {
   return (
     <div>
       View projects here
-      <AllProjects projects={projects} setProjects={setProjects} />
+      <ul>
+        {projects.map((project) => (
+          // Creates a project from each item in the array and gives it a key
+          <ProjectCard
+            project={project}
+            key={project.id}
+            setProjects={setProjects}
+          />
+        ))}
+      </ul>
     </div>
-  );
-}
-
-//Project component - shows image and name. onClick shows all info. Accepts projects as a prop from gallery
-function AllProjects({ projects, setProjects }) {
-  return (
-    <ul>
-      {projects.map((project) => (
-        // Creates a project from each item in the array and gives it a key
-        <ProjectCard
-          project={project}
-          key={project.id}
-          setProjects={setProjects}
-        />
-      ))}
-    </ul>
   );
 }
 
 function ProjectCard({ project, setProjects }) {
   //Fetch to toggle favorite on front and backend
-  const [editBox, setEditBox] = useState("false");
+  const [editBox, setEditBox] = useState(false);
 
   const toggleFavorite = () => {
     let options = {
@@ -53,6 +46,47 @@ function ProjectCard({ project, setProjects }) {
       })
       .catch((error) => console.log(error));
   };
+
+  // EDIT project
+  function EditBox({ project, setProjects }) {
+    return (
+      <form>
+        <h6>Edit {project.projectname}</h6>
+        <div>
+          <input
+            name="projectname"
+            value={project.projectname}
+            placeholder={project.projectname}
+            label="name"
+          ></input>
+        </div>
+        <div>
+          <select label="type" value={project.type} name="type">
+            <option>Paper craft</option>
+            <option>Knitting</option>
+            <option>Sewing</option>
+            <option>Painting and drawing</option>
+            <option>Collage</option>
+            <option>Fimo and clay</option>
+            {/* Option to write own type */}
+          </select>
+        </div>
+        <div>
+          <input type="text" name="materials" value={project.materials}></input>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="description"
+            value={project.description}
+          ></input>
+        </div>
+        <div>
+          <input type="text" name="image" value={project.image}></input>
+        </div>
+      </form>
+    );
+  }
 
   const toggleEditBox = () => {
     setEditBox(!editBox);
@@ -82,24 +116,6 @@ function ProjectCard({ project, setProjects }) {
   );
 }
 
-// Form takes id of selected button
-function EditBox({ project, setProjects }) {
-  return (
-    <form>
-      <h6>Form to edit {project.projectname}</h6>
-      <input
-        name="projectname"
-        value={project.projectname}
-        placeholder={project.projectname}
-        label="name"
-      ></input>
-      <input type="text" name="materials" value={project.materials}></input>
-      <input type="text" name="description" value={project.description}></input>
-      <input type="text" name="image" value={project.image}></input>
-    </form>
-  );
-}
-
 //DELETE
 function DeleteProjectButton({ project, setProjects }) {
   const handleDelete = () => {
@@ -121,7 +137,7 @@ function DeleteProjectButton({ project, setProjects }) {
   return (
     <button
       type="button"
-      className="btn btn-primary"
+      className="btn btn-light"
       data-toggle="modal"
       data-target="#deletemodal"
       onClick={(e) => handleDelete(project.id)}
@@ -130,5 +146,13 @@ function DeleteProjectButton({ project, setProjects }) {
     </button>
   );
 }
+
+//CONFIRM DELETE
+
+// function ViewProject() {
+//   return (
+//     <div>View selected project</div>
+//   )
+// }
 
 export default Gallery;

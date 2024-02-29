@@ -59,6 +59,7 @@ router.delete("/projects/:id", async (req, res) => {
 
 // UPDATE favourite - get project by id, toggle fav
 router.put(`/projects/:id`, async (req, res) => {
+  console.log(req);
   try {
     await db(
       `UPDATE projects SET favorite = !favorite WHERE id=${req.params.id};`
