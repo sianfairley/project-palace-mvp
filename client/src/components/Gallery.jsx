@@ -7,7 +7,7 @@ import { MdEdit } from "react-icons/md";
 import { MdEditOff } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { FaRegCircle } from "react-icons/fa";
-import { TiDelete } from "react-icons/ti";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -41,7 +41,7 @@ function ProjectCard({ project, setProjects }) {
       },
     };
 
-    fetch(`/api/projects/${project.id}`, options)
+    fetch(`/api/projects/favorites/${project.id}`, options)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -58,7 +58,7 @@ function ProjectCard({ project, setProjects }) {
       },
     };
 
-    fetch(`/api/projects/${project.id}`, options)
+    fetch(`/api/projects/completed/${project.id}`, options)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -125,7 +125,7 @@ function ProjectCard({ project, setProjects }) {
           {project.favorite ? <MdFavorite /> : <MdFavoriteBorder />}
         </button>
         <button onClick={(e) => toggleComplete(project.id)}>
-          {project.complete ? <FaRegCircleCheck /> : <FaRegCircle />}
+          {project.complete ? <p>Finished!</p> : <FaRegCircleCheck />}
         </button>
         <DeleteProjectButton project={project} setProjects={setProjects} />
         <button onClick={toggleEditBox}>
@@ -178,7 +178,7 @@ function DeleteProjectButton({ project, setProjects }) {
       data-target="#deletemodal"
       onClick={(e) => handleDelete(project.id)}
     >
-      <TiDelete />
+      <FaRegTrashAlt />
     </button>
   );
 }

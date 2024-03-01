@@ -3,9 +3,9 @@ import { useState } from "react";
 export default function Ideas() {
   const [image, setImage] = useState({});
 
-  const handleFetch = () => {
+  const handleFetch = (searchTerm) => {
     fetch(
-      "https://api.unsplash.com/photos/random?client_id=f51yIFfX0w3GTToG2VVQaLXeVWnylvLinhzXtGTuXAQ&content_filter=high&query=craft"
+      `https://api.unsplash.com/photos/random?client_id=f51yIFfX0w3GTToG2VVQaLXeVWnylvLinhzXtGTuXAQ&content_filter=high&query=${searchTerm}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -25,9 +25,17 @@ export default function Ideas() {
 
   return (
     <div>
-      <button onClick={handleFetch}>Get craft ideas!</button>
+      <button onClick={() => handleFetch("craft")}>
+        Get cute craft ideas!
+      </button>
       <div>
-        <img className="inspo-image" src={image.urls.small} />
+        {image.urls && image.urls.small && (
+          <img
+            className="inspo-image"
+            src={image.urls.small}
+            alt="Craft idea"
+          />
+        )}
       </div>
     </div>
   );

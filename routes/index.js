@@ -58,11 +58,24 @@ router.delete("/projects/:id", async (req, res) => {
 });
 
 // UPDATE favourite - get project by id, toggle fav
-router.put(`/projects/:id`, async (req, res) => {
+router.put(`/projects/favorites/:id`, async (req, res) => {
   console.log(req);
   try {
     await db(
       `UPDATE projects SET favorite = !favorite WHERE id=${req.params.id};`
+    );
+    selectAllItems(req, res);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+// UPDATE favourite - get project by id, toggle fav
+router.put(`/projects/completed/:id`, async (req, res) => {
+  console.log(req);
+  try {
+    await db(
+      `UPDATE projects SET complete = !complete WHERE id=${req.params.id};`
     );
     selectAllItems(req, res);
   } catch (err) {
