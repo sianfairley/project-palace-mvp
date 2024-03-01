@@ -4,11 +4,13 @@ import { useEffect } from "react";
 
 import Gallery from "./components/Gallery.jsx";
 import Create from "./components/create.jsx";
+import Ideas from "./components/Ideas.jsx";
 import Error404 from "./components/Error404.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import ShowcaseProject from "./components/ShowcaseProject.jsx";
 
 export function Button({ children, onClick }) {
   return (
@@ -51,6 +53,10 @@ function App() {
           element={<Gallery projects={projects} setProjects={setProjects} />}
         />
         <Route path="/ideas" element={<Ideas />} />
+        <Route
+          path="/project/:id"
+          element={<ShowcaseProject projects={projects} />}
+        />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
@@ -70,7 +76,7 @@ function App() {
   //HOME Contains three buttons to go to different pages
   function Home() {
     return (
-      <div>
+      <div className="homepage">
         <h2>What would you like to do?</h2>
         <div>
           <Button>
@@ -89,9 +95,5 @@ function App() {
         </div>
       </div>
     );
-  }
-
-  function Ideas() {
-    return <div>Get ideas here</div>;
   }
 }

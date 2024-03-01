@@ -52,3 +52,15 @@
   width: 300px;
   border-radius: 20px;
 }
+
+li {
+  list-style: none;
+}
+
+.homepage {
+  background-image: "./assets/home_background.jpg";
+}
+
+.inspo-image{
+  max-width=
+}

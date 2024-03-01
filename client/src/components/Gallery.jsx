@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import { MdFavorite } from "react-icons/md";
 import { MdFavoriteBorder } from "react-icons/md";
@@ -6,15 +7,14 @@ import { MdEdit } from "react-icons/md";
 import { MdEditOff } from "react-icons/md";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { FaRegCircle } from "react-icons/fa";
-
 import { TiDelete } from "react-icons/ti";
+
 import "bootstrap/dist/css/bootstrap.css";
 
 //Split project into separate component. Pass projects as prop or use component composition?
 function Gallery({ projects, setProjects }) {
   return (
     <div>
-      View projects here
       <ul>
         {projects.map((project) => (
           // Creates a project from each item in the array and gives it a key
@@ -113,7 +113,7 @@ function ProjectCard({ project, setProjects }) {
   };
 
   return (
-    <>
+    <div>
       <h4>{project.projectname}</h4>
       <div>
         <img src={project.image} alt={project.name} className="image-gallery" />
@@ -131,15 +131,28 @@ function ProjectCard({ project, setProjects }) {
         <button onClick={toggleEditBox}>
           {editBox ? <MdEditOff /> : <MdEdit />}
         </button>
+
         {editBox ? (
           <EditBox project={project} setProjects={setProjects} />
         ) : null}
       </div>
-    </>
+      <Link to={`/project/${project.id}`} project={project}>
+        <button
+          type="button"
+          className="btn btn-light"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          View
+        </button>
+      </Link>
+    </div>
   );
 }
 
-//DELETE
+{
+  /* //DELETE */
+}
 function DeleteProjectButton({ project, setProjects }) {
   const handleDelete = () => {
     let options = {
