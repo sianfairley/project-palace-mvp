@@ -57,7 +57,7 @@ router.delete("/projects/:id", async (req, res) => {
   }
 });
 
-// UPDATE favourite - get project by id, toggle fav
+// UPDATE FAVORITE - get project by id, toggle fav
 router.put(`/projects/favorites/:id`, async (req, res) => {
   console.log(req);
   try {
@@ -70,7 +70,7 @@ router.put(`/projects/favorites/:id`, async (req, res) => {
   }
 });
 
-// UPDATE favourite - get project by id, toggle fav
+// UPDATE COMPLETE - get project by id, toggle fav
 router.put(`/projects/completed/:id`, async (req, res) => {
   console.log(req);
   try {
@@ -82,5 +82,7 @@ router.put(`/projects/completed/:id`, async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+// UPDATE all project
 
 module.exports = router;

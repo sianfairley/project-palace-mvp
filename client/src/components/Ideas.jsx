@@ -25,9 +25,7 @@ export default function Ideas() {
 
   return (
     <div>
-      <button onClick={() => handleFetch("craft")}>
-        Get cute craft ideas!
-      </button>
+      <button onClick={() => handleFetch("craft")}>Get craft ideas!</button>
       <div>
         {image.urls && image.urls.small && (
           <img

@@ -19,12 +19,12 @@ export default function ShowcaseProject() {
         console.error("Error fetching project details:", error);
       });
   }, []);
-
+  console.log("Project ID:", project.id);
   //Create modal to show project info
   return (
     <div
       className="modal fade"
-      id="exampleModal"
+      id="showcaseModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
