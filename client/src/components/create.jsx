@@ -139,7 +139,7 @@ function Create({ setProjects }) {
                 />
               </label> */}
         </div>
-        <button className="btn btn-light">Create!</button>
+        <button className="btn btn-success">Create!</button>
       </form>
       {viewGallery ? <OnSubmissionViewGallery /> : null}
     </>
@@ -149,7 +149,6 @@ function Create({ setProjects }) {
 function OnSubmissionViewGallery() {
   return (
     <div>
-      <p>Great work!</p>
       <button>
         <NavLink to="/gallery">See my projects</NavLink>
       </button>

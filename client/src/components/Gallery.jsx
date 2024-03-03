@@ -13,6 +13,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
 import EditBox from "./EditProject";
+import EditForm from "./EditForm";
 import "bootstrap/dist/css/bootstrap.css";
 
 function Gallery({ projects, setProjects }) {
@@ -36,6 +37,7 @@ function ProjectCard({ project, setProjects }) {
   const [editBox, setEditBox] = useState(false);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [deleteWarning, setDeleteWarning] = useState(false);
+  const [editForm, setEditForm] = useState(false);
 
   const toggleFavorite = () => {
     let options = {
@@ -77,6 +79,10 @@ function ProjectCard({ project, setProjects }) {
 
   const openProjectModal = () => {
     setProjectModalOpen(true);
+  };
+
+  const openEditForm = () => {
+    setEditForm(true);
   };
 
   return (
@@ -131,6 +137,17 @@ function ProjectCard({ project, setProjects }) {
       {projectModalOpen && (
         <ProjectModal project={project} setProjects={setProjects} />
       )}
+
+      <button
+        onClick={openEditForm}
+        type="button"
+        className="btn btn-light"
+        data-toggle="modal"
+        data-target="#editForm"
+      >
+        EDIT FORM TEST
+      </button>
+      {editForm && <EditForm project={project} setProject={setProjects} />}
     </div>
   );
 }
