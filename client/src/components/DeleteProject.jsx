@@ -1,5 +1,3 @@
-import { FaRegTrashAlt } from "react-icons/fa";
-
 export default function DeleteProjectButton({ project, setProjects }) {
   const handleDelete = () => {
     let options = {
@@ -25,7 +23,7 @@ export default function DeleteProjectButton({ project, setProjects }) {
       data-target="#deletemodal"
       onClick={(e) => handleDelete(project.id)}
     >
-      <FaRegTrashAlt />
+      <h6>Yes ✅</h6>
     </button>
   );
 }

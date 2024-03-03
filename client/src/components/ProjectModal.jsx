@@ -1,25 +1,7 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function ProjectModal({ project, setProject }) {
-  //Extracts parameters as object
-  const { id } = useParams();
-  // const [project, setProject] = useState([]);
-
-  useEffect(() => {
-    fetch(`/api/projects/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setProject(data); // Set the project details
-      })
-      .catch((error) => {
-        console.error("Error fetching project details:", error);
-      });
-  }, []);
-  console.log("Project ID:", project.id);
+export default function ProjectModal({ project }) {
   //Create modal to show project info
   return (
     <div
@@ -47,7 +29,7 @@ export default function ProjectModal({ project, setProject }) {
             <div>
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-light"
                 data-dismiss="modal"
               >
                 <IoClose />

@@ -8,6 +8,7 @@ import {
   MdEditOff,
 } from "react-icons/md";
 import { FaRegCircleCheck, FaRegEye } from "react-icons/fa6";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
@@ -31,9 +32,10 @@ function Gallery({ projects, setProjects }) {
   );
 }
 
-function ProjectCard({ project, setProjects, showcase, setShowcase }) {
+function ProjectCard({ project, setProjects }) {
   const [editBox, setEditBox] = useState(false);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
+  const [deleteWarning, setDeleteWarning] = useState(false);
 
   const toggleFavorite = () => {
     let options = {
@@ -91,26 +93,44 @@ function ProjectCard({ project, setProjects, showcase, setShowcase }) {
         <button onClick={(e) => toggleComplete(project.id)}>
           {project.complete ? <p>Finished!</p> : <FaRegCircleCheck />}
         </button>
-        <DeleteProjectButton project={project} setProjects={setProjects} />
+
         <button onClick={toggleEditBox}>
           {editBox ? <MdEditOff /> : <MdEdit />}
         </button>
-
         {editBox ? (
           <EditBox project={project} setProjects={setProjects} />
         ) : null}
+        <button onClick={() => setDeleteWarning(true)}>
+          <FaRegTrashAlt />
+        </button>
+        {deleteWarning && (
+          <div className="alert alert-success mt-3" role="alert">
+            <h5>Delete project?</h5>
+            <DeleteProjectButton project={project} setProjects={setProjects} />
+            <button
+              type="button"
+              className="close"
+              // aria-label="Close"
+              onClick={() => setDeleteWarning(false)}
+            >
+              No ❌
+            </button>
+          </div>
+        )}
       </div>
 
       <button
         onClick={openProjectModal}
         type="button"
-        className="btn btn-primary"
+        className="btn btn-light"
         data-toggle="modal"
         data-target="#projectModal"
       >
-        Modal <FaRegEye />
+        <FaRegEye />
       </button>
-      {projectModalOpen && <ProjectModal project={project} />}
+      {projectModalOpen && (
+        <ProjectModal project={project} setProjects={setProjects} />
+      )}
     </div>
   );
 }
