@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function ShowcaseProject() {
+export default function ProjectModal({ project, setProject }) {
   //Extracts parameters as object
   const { id } = useParams();
-  const [project, setProject] = useState([]);
+  // const [project, setProject] = useState([]);
 
   useEffect(() => {
     fetch(`/api/projects/${id}`)
@@ -24,7 +24,7 @@ export default function ShowcaseProject() {
   return (
     <div
       className="modal fade"
-      id="showcaseModal"
+      id="projectModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
