@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
 
 //Reused in different routes to show all projects
 function selectAllItems(req, res) {
-  db("SELECT * FROM projects ORDER BY id ASC;")
+  db("SELECT * FROM projects ORDER BY id DESC;")
     .then((results) => {
       res.send(results.data);
     })
@@ -84,5 +84,22 @@ router.put(`/projects/completed/:id`, async (req, res) => {
 });
 
 // UPDATE all project
+router.put("/projects/update/:id", async (req, res) => {
+  //get the info of the new item from req.body
+  let updatedProject = req.body;
+  let updatedProjectId = req.params.id;
+  try {
+    await db(
+      `UPDATE projects SET projectname = "${updatedProject.projectname}", type = "${updatedProject.type}", materials="${updatedProject.materials}", description="${updatedProject.description}", image"${updatedProject.image}" WHERE id = updatedProjectId`
+    );
+    const updatedProject = await db(
+      `SELECT * FROM projects WHERE id = ${updatedProjectId}`
+    );
+    res.status(200).json(updatedProject.data[0]);
 
+    console.log(updatedProject.data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 module.exports = router;

@@ -64,7 +64,7 @@ export default function EditForm({ project, setProjects }) {
             </h5>
           </div>
           <div className="modal-body">
-            <form onSubmit={() => handleSubmit()}>
+            <form onSubmit={handleSubmit}>
               <h6>Edit {project.projectname}</h6>
               <div>
                 <input

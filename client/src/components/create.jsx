@@ -13,7 +13,6 @@ function Create({ setProjects }) {
     complete: false,
     favorite: false,
   });
-  const [viewGallery, setViewGallery] = useState(false);
 
   //Gets input
   const handleChange = (e) => {
@@ -23,7 +22,6 @@ function Create({ setProjects }) {
   const handleSubmitProject = (event) => {
     event.preventDefault();
     addProject();
-    setViewGallery(true);
   };
 
   // POST add new project
@@ -139,20 +137,11 @@ function Create({ setProjects }) {
                 />
               </label> */}
         </div>
-        <button className="btn btn-success">Create!</button>
+        <button type="submit" className="btn btn-light">
+          Create!
+        </button>
       </form>
-      {viewGallery ? <OnSubmissionViewGallery /> : null}
     </>
-  );
-}
-
-function OnSubmissionViewGallery() {
-  return (
-    <div>
-      <button>
-        <NavLink to="/gallery">See my projects</NavLink>
-      </button>
-    </div>
   );
 }
 

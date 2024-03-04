@@ -1,4 +1,5 @@
 import { useState } from "react";
+import YoutubeIdeas from "./YoutubeIdeas";
 
 export default function Ideas() {
   const [image, setImage] = useState({});
@@ -38,6 +39,9 @@ export default function Ideas() {
             alt="Craft idea"
           />
         )}
+      </div>
+      <div>
+        <YoutubeIdeas />
       </div>
     </div>
   );

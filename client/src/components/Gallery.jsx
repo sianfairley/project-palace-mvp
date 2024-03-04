@@ -73,9 +73,9 @@ function ProjectCard({ project, setProjects }) {
       .catch((error) => console.log(error));
   };
 
-  const toggleEditBox = () => {
-    setEditBox(!editBox);
-  };
+  // const toggleEditBox = () => {
+  //   setEditBox(!editBox);
+  // };
 
   const openProjectModal = () => {
     setProjectModalOpen(true);
@@ -100,12 +100,22 @@ function ProjectCard({ project, setProjects }) {
           {project.complete ? <p>Finished!</p> : <FaRegCircleCheck />}
         </button>
 
-        <button onClick={toggleEditBox}>
+        {/* <button onClick={toggleEditBox}>
           {editBox ? <MdEditOff /> : <MdEdit />}
         </button>
         {editBox ? (
           <EditBox project={project} setProjects={setProjects} />
-        ) : null}
+        ) : null} */}
+        <button
+          onClick={openEditForm}
+          type="button"
+          className="btn btn-light"
+          data-toggle="modal"
+          data-target="#editForm"
+        >
+          <MdEdit />
+        </button>
+        {editForm && <EditForm project={project} setProject={setProjects} />}
         <button onClick={() => setDeleteWarning(true)}>
           <FaRegTrashAlt />
         </button>
@@ -137,17 +147,6 @@ function ProjectCard({ project, setProjects }) {
       {projectModalOpen && (
         <ProjectModal project={project} setProjects={setProjects} />
       )}
-
-      <button
-        onClick={openEditForm}
-        type="button"
-        className="btn btn-light"
-        data-toggle="modal"
-        data-target="#editForm"
-      >
-        EDIT FORM TEST
-      </button>
-      {editForm && <EditForm project={project} setProject={setProjects} />}
     </div>
   );
 }
