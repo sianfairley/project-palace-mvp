@@ -2,11 +2,12 @@ import { useState } from "react";
 import YoutubeIdeas from "./YoutubeIdeas";
 
 export default function Ideas() {
+  let key = import.meta.env.VITE_UNSPLASH_API_KEY;
   const [image, setImage] = useState({});
 
   const handleFetch = (searchTerm) => {
     fetch(
-      `https://api.unsplash.com/photos/random?client_id=f51yIFfX0w3GTToG2VVQaLXeVWnylvLinhzXtGTuXAQ&content_filter=high&query=${searchTerm}`
+      `https://api.unsplash.com/photos/random?client_id=${key}&content_filter=high&query=${searchTerm}`
     )
       .then((response) => {
         if (!response.ok) {

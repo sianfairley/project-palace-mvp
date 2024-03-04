@@ -1,7 +1,9 @@
 export default function YoutubeIdeas() {
+  let key = import.meta.env.VITE_YOUTUBE_API_KEY
+
   const handleYoutubeFetch = () => {
     fetch(
-      "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBy5ww0M9v-SMe3GtTnwrH38Oca_IE47EY&type=video&part=snippet&q=kids%20craft"
+      `https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&q=kids%20craft`
     )
       .then((response) => {
         if (!response.ok) {
