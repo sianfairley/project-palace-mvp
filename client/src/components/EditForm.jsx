@@ -19,10 +19,6 @@ export default function EditForm({ project, setProjects }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedProject = {
-      ...project,
-      ...updatedProject,
-    };
 
     // fetch - PUT request
     fetch(`/api/projects/update/${project.id}`, {

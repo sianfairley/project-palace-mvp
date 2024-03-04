@@ -87,17 +87,21 @@ router.put(`/projects/completed/:id`, async (req, res) => {
 router.put("/projects/update/:id", async (req, res) => {
   //get the info of the new item from req.body
   let updatedProject = req.body;
-  let updatedProjectId = req.params.id;
+  console.log(updatedProject);
+  let updatedProjectId = Number(req.params.id);
+  console.log(
+    `UPDATE projects SET projectname = "${updatedProject.projectname}", type = "${updatedProject.type}", materials="${updatedProject.materials}", description="${updatedProject.description}", image="${updatedProject.image}" WHERE id = ${updatedProjectId}`
+  );
   try {
     await db(
-      `UPDATE projects SET projectname = "${updatedProject.projectname}", type = "${updatedProject.type}", materials="${updatedProject.materials}", description="${updatedProject.description}", image"${updatedProject.image}" WHERE id = updatedProjectId`
+      `UPDATE projects SET projectname = "${updatedProject.projectname}", type = "${updatedProject.type}", materials="${updatedProject.materials}", description="${updatedProject.description}", image="${updatedProject.image}" WHERE id = ${updatedProjectId}`
     );
-    const updatedProject = await db(
+    const getUpdatedProject = await db(
       `SELECT * FROM projects WHERE id = ${updatedProjectId}`
     );
-    res.status(200).json(updatedProject.data[0]);
+    res.status(200).json(getUpdatedProject.data[0]);
 
-    console.log(updatedProject.data);
+    console.log(getUpdatedProject.data);
   } catch (err) {
     res.status(500).send(err);
   }

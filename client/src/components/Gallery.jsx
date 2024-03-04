@@ -115,7 +115,7 @@ function ProjectCard({ project, setProjects }) {
         >
           <MdEdit />
         </button>
-        {editForm && <EditForm project={project} setProject={setProjects} />}
+        {editForm && <EditForm project={project} setProjects={setProjects} />}
         <button onClick={() => setDeleteWarning(true)}>
           <FaRegTrashAlt />
         </button>

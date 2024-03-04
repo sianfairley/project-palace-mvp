@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Routes, Route, Link, NavLink } from "react-router-dom";
+import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
 // import Button from "./src/App.jsx";
 
 function Create({ setProjects }) {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     projectname: "",
     type: "",
@@ -22,6 +23,7 @@ function Create({ setProjects }) {
   const handleSubmitProject = (event) => {
     event.preventDefault();
     addProject();
+    navigate("/gallery");
   };
 
   // POST add new project
