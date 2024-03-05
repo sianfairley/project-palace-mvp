@@ -7,7 +7,7 @@ export default function YoutubeIdeas() {
 
   const handleYoutubeFetch = () => {
     fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&safeSearch=strict&q=kids%20craft%20felt`
+      `https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&safeSearch=strict&q=kids%20craft&maxResults=20`
     )
       .then((response) => {
         if (!response.ok) {
@@ -17,9 +17,9 @@ export default function YoutubeIdeas() {
       })
       .then((data) => {
         let videos = data.items;
-        setVideoId(data.items[0].id.videoId);
-        console.log("First video id:", videoId);
-        console.log(videos);
+        let i = Math.floor(Math.random() * videos.length);
+        setVideoId(videos[i].id.videoId);
+        console.log("Random video id:", videoId);
         videos.forEach((video) => {
           console.log(video.snippet.title);
           console.log(video.id.videoId);
