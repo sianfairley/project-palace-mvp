@@ -61,17 +61,18 @@ export default function EditForm({ project, setProjects }) {
           </div>
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
-              <h6>Edit {project.projectname}</h6>
               <div>
+                <label>Name: </label>
                 <input
                   name="projectname"
                   value={updatedProject.projectname}
                   placeholder={project.projectname}
-                  label="name"
+                  label="projectname"
                   onChange={handleChange}
                 ></input>
               </div>
               <div>
+                <label>Type: </label>
                 <select
                   label="type"
                   placeholder={project.type}
@@ -89,6 +90,8 @@ export default function EditForm({ project, setProjects }) {
                 </select>
               </div>
               <div>
+                <label>Materials: </label>
+
                 <input
                   type="text"
                   name="materials"
@@ -98,6 +101,8 @@ export default function EditForm({ project, setProjects }) {
                 ></input>
               </div>
               <div>
+                <label>Description: </label>
+
                 <input
                   type="text"
                   name="description"
@@ -107,6 +112,8 @@ export default function EditForm({ project, setProjects }) {
                 ></input>
               </div>
               <div>
+                <label>Image: </label>
+
                 <input
                   type="text"
                   name="image"

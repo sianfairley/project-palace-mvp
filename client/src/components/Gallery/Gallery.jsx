@@ -1,23 +1,15 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
 
-import {
-  MdFavorite,
-  MdFavoriteBorder,
-  MdEdit,
-  MdEditOff,
-} from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder, MdEdit } from "react-icons/md";
 import { FaRegCircleCheck, FaRegEye } from "react-icons/fa6";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
-import EditBox from "./EditProject";
 import EditForm from "./EditForm";
 import "bootstrap/dist/css/bootstrap.css";
 
 function Gallery({ projects, setProjects }) {
-  //DEal with projects - sits in ProjectCard
   return (
     <div>
       <ul>
@@ -34,7 +26,6 @@ function Gallery({ projects, setProjects }) {
 }
 
 function ProjectCard({ project, setProjects }) {
-  const [editBox, setEditBox] = useState(false);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [deleteWarning, setDeleteWarning] = useState(false);
   const [editForm, setEditForm] = useState(false);
@@ -73,10 +64,6 @@ function ProjectCard({ project, setProjects }) {
       .catch((error) => console.log(error));
   };
 
-  // const toggleEditBox = () => {
-  //   setEditBox(!editBox);
-  // };
-
   const openProjectModal = () => {
     setProjectModalOpen(true);
   };
@@ -87,7 +74,6 @@ function ProjectCard({ project, setProjects }) {
 
   return (
     <div>
-      <h4>{project.projectname}</h4>
       <div>
         <img src={project.image} alt={project.name} className="image-gallery" />
       </div>
@@ -100,12 +86,6 @@ function ProjectCard({ project, setProjects }) {
           {project.complete ? <p>Finished!</p> : <FaRegCircleCheck />}
         </button>
 
-        {/* <button onClick={toggleEditBox}>
-          {editBox ? <MdEditOff /> : <MdEdit />}
-        </button>
-        {editBox ? (
-          <EditBox project={project} setProjects={setProjects} />
-        ) : null} */}
         <button
           onClick={openEditForm}
           type="button"
@@ -126,7 +106,6 @@ function ProjectCard({ project, setProjects }) {
             <button
               type="button"
               className="close"
-              // aria-label="Close"
               onClick={() => setDeleteWarning(false)}
             >
               No ❌

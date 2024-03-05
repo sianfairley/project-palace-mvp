@@ -28,10 +28,10 @@ export default function Ideas() {
   return (
     <div>
       <h3>Get ideas!</h3>
-      <button onClick={() => handleFetch("sewing")}>Sew</button>
+      <button onClick={() => handleFetch("sewing%20craft")}>Sew</button>
       <button onClick={() => handleFetch("knitting")}>Knit</button>
       <button onClick={() => handleFetch("origami")}>Origami</button>
-      <button onClick={() => handleFetch("paint%20kids")}>Paint</button>
+      <button onClick={() => handleFetch("painting")}>Paint</button>
       <div>
         {image.urls && image.urls.small && (
           <img

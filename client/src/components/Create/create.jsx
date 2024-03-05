@@ -21,9 +21,20 @@ function Create({ setProjects }) {
   };
 
   const handleSubmitProject = (event) => {
-    event.preventDefault();
-    addProject();
-    navigate("/gallery");
+    {
+      event.preventDefault();
+      if (input.image.length > 255) {
+        console.log("Project image must be less than 255 characters");
+        alert("The image url is too long :(");
+        return;
+      } else if (input.projectname === "") {
+        console.log("Project must have a name");
+        alert("Please give your project a name :)");
+        return;
+      }
+      addProject();
+      navigate("/gallery");
+    }
   };
 
   // POST add new project

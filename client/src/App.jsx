@@ -2,14 +2,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-import Gallery from "./components/Gallery.jsx";
-import Create from "./components/create.jsx";
-import Ideas from "./components/Ideas.jsx";
+import Gallery from "./components/Gallery/Gallery.jsx";
+import Create from "./components/Create/create.jsx";
+import Ideas from "./components/Ideas/Ideas.jsx";
 import Error404 from "./components/Error404.jsx";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 export function Button({ children, onClick }) {
   return (
