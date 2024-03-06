@@ -43,7 +43,6 @@ function App() {
 
   return (
     <div>
-      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create setProjects={setProjects} />} />
@@ -58,35 +57,25 @@ function App() {
     </div>
   );
 
-  function NavBar() {
-    return (
-      <>
-        <Button>
-          <Link to="/">🏠</Link>
-        </Button>
-        <h1>My Craftbook</h1>
-      </>
-    );
-  }
-
   //HOME Contains three buttons to go to different pages
   function Home() {
     return (
-      <div className="homepage">
-        <h2>What would you like to do?</h2>
-        <div>
+      <div className="home-container">
+        <h1>My Craftbook</h1>
+        <h3>What would you like to do?</h3>
+        <div className="link-button">
           <Button>
-            <Link to="/create">Create</Link>
+            <Link to="/create">Create 🎨</Link>
           </Button>
         </div>
-        <div>
+        <div className="link-button">
           <Button>
-            <Link to="/gallery">See My Projects</Link>
+            <Link to="/gallery">See My Projects 🖼️</Link>
           </Button>
         </div>
-        <div>
+        <div className="link-button">
           <Button>
-            <Link to="/ideas">Get Ideas</Link>
+            <Link to="/ideas">Get Ideas 💡</Link>
           </Button>
         </div>
       </div>

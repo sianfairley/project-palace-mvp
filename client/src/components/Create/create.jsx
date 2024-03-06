@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
 // import Button from "./src/App.jsx";
 
 function Create({ setProjects }) {
@@ -59,8 +60,9 @@ function Create({ setProjects }) {
 
   return (
     <>
-      <form onSubmit={handleSubmitProject}>
-        <h2>Create a new project</h2>
+      <Navbar />
+      <h2 className="page-header">Create a new project</h2>
+      <form onSubmit={handleSubmitProject} className="create-form">
         <div>
           <h5>1. Give your project a name</h5>
           <input
@@ -113,10 +115,7 @@ function Create({ setProjects }) {
         {/* Is it possible to map through preset images and insert as component? */}
         <div>
           <h5>5. Add an image</h5>
-          <p>
-            You can also add a photo or your project later when you have
-            finished.
-          </p>
+
           <input
             type="text"
             label="image url"
@@ -150,8 +149,8 @@ function Create({ setProjects }) {
                 />
               </label> */}
         </div>
-        <button type="submit" className="btn btn-light">
-          Create!
+        <button type="submit" className="btn btn-light create-button">
+          Create!🎨
         </button>
       </form>
     </>

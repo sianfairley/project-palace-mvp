@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { MdFavorite, MdFavoriteBorder, MdEdit } from "react-icons/md";
 import { FaRegCircleCheck, FaRegEye } from "react-icons/fa6";
@@ -8,17 +8,35 @@ import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
 import EditForm from "./EditForm";
 import "bootstrap/dist/css/bootstrap.css";
+import Navbar from "../Navbar";
 
 function Gallery({ projects, setProjects }) {
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Data fetched from database");
+        console.log(data);
+        setProjects(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div>
-      <ul>
+      <Navbar />
+      <ul className="project-list">
         {projects.map((project) => (
-          <ProjectCard
-            project={project}
-            key={project.id}
-            setProjects={setProjects}
-          />
+          <li key={project.id} className="project-list-item">
+            <ProjectCard project={project} setProjects={setProjects} />
+          </li>
         ))}
       </ul>
     </div>
@@ -73,17 +91,25 @@ function ProjectCard({ project, setProjects }) {
   };
 
   return (
-    <div>
+    <div className="project-card">
       <div>
-        <img src={project.image} alt={project.name} className="image-gallery" />
+        <img src={project.image} alt={project.name} className="project-image" />
       </div>
 
-      <div>
+      <div className="button-container">
         <button onClick={(e) => toggleFavorite(project.id)}>
-          {project.favorite ? <MdFavorite /> : <MdFavoriteBorder />}
+          {project.favorite ? (
+            <MdFavorite style={{ color: "red" }} />
+          ) : (
+            <MdFavoriteBorder />
+          )}
         </button>
         <button onClick={(e) => toggleComplete(project.id)}>
-          {project.complete ? <p>Finished!</p> : <FaRegCircleCheck />}
+          {project.complete ? (
+            <FaRegCircleCheck style={{ color: "green" }} />
+          ) : (
+            <FaRegCircleCheck />
+          )}
         </button>
 
         <button
@@ -95,7 +121,14 @@ function ProjectCard({ project, setProjects }) {
         >
           <MdEdit />
         </button>
-        {editForm && <EditForm project={project} setProjects={setProjects} />}
+        {editForm && (
+          <EditForm
+            project={project}
+            setProjects={setProjects}
+            editForm={editForm}
+            setEditForm={setEditForm}
+          />
+        )}
         <button onClick={() => setDeleteWarning(true)}>
           <FaRegTrashAlt />
         </button>

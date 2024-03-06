@@ -1,9 +1,6 @@
 import { useState } from "react";
-import YoutubeIdeas from "./YoutubeIdeas";
-import ImageIdeas from "./ImageIdeas";
-import Navbar from "../Navbar";
 
-export default function Ideas() {
+export default function ImageIdeas() {
   let key = import.meta.env.VITE_UNSPLASH_API_KEY;
   const [image, setImage] = useState({});
 
@@ -28,15 +25,19 @@ export default function Ideas() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <h3 className="page-header">Get ideas!</h3>
+    <div className="image-ideas">
+      <button onClick={() => handleFetch("sewing%20craft")}>Sew 🧵</button>
+      <button onClick={() => handleFetch("knitting")}>Knit 🧶</button>
+      <button onClick={() => handleFetch("origami")}>Paper craft ✂️ </button>
+      <button onClick={() => handleFetch("painting")}>Paint 🖌️</button>
       <div>
-        <ImageIdeas />
-      </div>
-
-      <div>
-        <YoutubeIdeas />
+        {image.urls && image.urls.small && (
+          <img
+            className="inspo-image"
+            src={image.urls.small}
+            alt="Craft idea"
+          />
+        )}
       </div>
     </div>
   );

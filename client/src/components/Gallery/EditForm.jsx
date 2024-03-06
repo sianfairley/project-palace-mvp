@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function EditForm({ project, setProjects }) {
+export default function EditForm({
+  project,
+  setProjects,
+  editForm,
+  setEditForm,
+}) {
   const [updatedProject, setUpdatedProject] = useState({
     projectname: project.projectname,
     type: project.type,
@@ -19,6 +24,7 @@ export default function EditForm({ project, setProjects }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setEditForm(false);
 
     // fetch - PUT request
     fetch(`/api/projects/update/${project.id}`, {

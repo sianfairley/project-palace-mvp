@@ -30,7 +30,7 @@ export default function YoutubeIdeas() {
       });
   };
   return (
-    <>
+    <div className="youtube">
       <button onClick={handleYoutubeFetch}>Find a craft video</button>
       <div>
         {videoId && (
@@ -45,6 +45,6 @@ export default function YoutubeIdeas() {
           ></iframe>
         )}
       </div>
-    </>
+    </div>
   );
 }
