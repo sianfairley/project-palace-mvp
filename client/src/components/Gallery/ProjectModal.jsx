@@ -13,7 +13,7 @@ export default function ProjectModal({ project }) {
       aria-hidden="true"
     >
       <div className="modal-dialog" role="document">
-        <div className="modal-content">
+        <div className="modal-content project-modal">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
               {project.projectname}

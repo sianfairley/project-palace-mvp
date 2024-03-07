@@ -31,7 +31,7 @@ export default function YoutubeIdeas() {
   };
   return (
     <div className="youtube">
-      <button onClick={handleYoutubeFetch}>Find a craft video</button>
+      <button onClick={handleYoutubeFetch}>Find a craft video 🎬</button>
       <div>
         {videoId && (
           <iframe

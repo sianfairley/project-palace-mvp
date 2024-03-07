@@ -61,7 +61,7 @@ function App() {
   function Home() {
     return (
       <div className="home-container">
-        <h1>My Craftbook</h1>
+        <h1>The Project Palace</h1>
         <h3>What would you like to do?</h3>
         <div className="link-button">
           <Button>

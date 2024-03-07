@@ -6,7 +6,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
-// import EditForm from "./EditForm";
+import SearchProjects from "./SearchProjects";
 import EditProject from "./EditProject";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "../Navbar";
@@ -35,7 +35,10 @@ function Gallery({ projects, setProjects }) {
       <div>
         <Navbar />
       </div>
-      <div className="container sm-1 md-3 lg-4">
+      <div>
+        <SearchProjects />
+      </div>
+      {/* <div className="container sm-1 md-3 lg-4">
         <ul className="project-list">
           {projects.map((project) => (
             <li key={project.id} className="project-list-item">
@@ -43,6 +46,22 @@ function Gallery({ projects, setProjects }) {
             </li>
           ))}
         </ul>
+      </div> */}
+      <div className="container">
+        <div className="row">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              className="col-lg-4 col-md-6 project-list-item m-2"
+            >
+              <ProjectCard
+                project={project}
+                setProjects={setProjects}
+                className="project-card"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -99,7 +118,7 @@ function ProjectCard({ project, setProjects }) {
   };
 
   return (
-    <div className="project-card">
+    <div>
       <div>
         <img src={project.image} alt={project.name} className="project-image" />
       </div>
@@ -107,14 +126,14 @@ function ProjectCard({ project, setProjects }) {
       <div className="button-container">
         <button onClick={(e) => toggleFavorite(project.id)}>
           {project.favorite ? (
-            <MdFavorite style={{ color: "red" }} />
+            <MdFavorite style={{ color: "var(--bright-pink)" }} />
           ) : (
             <MdFavoriteBorder />
           )}
         </button>
         <button onClick={(e) => toggleComplete(project.id)}>
           {project.complete ? (
-            <FaRegCircleCheck style={{ color: "green" }} />
+            <FaRegCircleCheck style={{ color: "var(--bright-pink)" }} />
           ) : (
             <FaRegCircleCheck />
           )}
@@ -127,7 +146,11 @@ function ProjectCard({ project, setProjects }) {
           // data-toggle="modal"
           // data-target="#editForm"
         >
-          {openEditProject ? <MdEdit style={{ color: "red" }} /> : <MdEdit />}
+          {openEditProject ? (
+            <MdEdit style={{ color: "var(--mid-purple)" }} />
+          ) : (
+            <MdEdit style={{ color: "var(--dark-purple)" }} />
+          )}
         </button>
 
         <button onClick={() => setDeleteWarning(true)}>

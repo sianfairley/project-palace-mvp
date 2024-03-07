@@ -31,12 +31,16 @@ export default function Ideas() {
     <div>
       <Navbar />
       <h3 className="page-header">Get ideas!</h3>
-      <div>
-        <ImageIdeas />
-      </div>
+      <div className="container ideas-container">
+        <div className="row justify-content-center">
+          <div className="col col-lg-6 p-5">
+            <ImageIdeas className="image-ideas" />
+          </div>
 
-      <div>
-        <YoutubeIdeas />
+          <div className="col col-lg-6 p-5">
+            <YoutubeIdeas className="youtube-ideas" />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,18 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: ;
+  font-family: "Poppins";
+
+  --palest-purple: #e2e1ff;
+  --light-purple: #b3b3fb;
+  --mid-purple: #aba8ef;
+  --dark-purple: #4d4670;
+  --light-orange: #f6ae64;
+  --dark-orange: #f49f44;
+  --palest-pink: #dcb9e3;
+  --mid-pink: #ffa0e4;
+  --bright-pink: #e14c8e;
+  --grey-blue: #517597;
 }
 
 button {
@@ -14,16 +25,18 @@ button {
 .home-container {
   height: 500px;
   width: 500px;
-  background-image: url("./assets/home_background_new.jpg");
+  background-image: url("./assets/images/home_background_new.jpg");
   background-position: center;
   background-size: 115%;
   padding-top: 150px;
 }
 
 .home-button {
-  background-color: #b3b3fb7b;
+  background-color: var(--light-purple);
   padding: 10px;
   border-radius: 5px;
+  border: none;
+  margin: none;
 }
 
 .link-button {
@@ -37,31 +50,33 @@ button {
   flex-direction: column;
   height: 550px;
   width: 550px;
+  padding-top: 50px;
   text-align: center;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   margin-top: 20px;
   padding: 20px;
-  background-color: rgba(255, 158, 228, 0.349);
+  background-color: var(--palest-pink);
   border-radius: 40% 20% 70% 30%;
 }
 
-.create-form .create-button {
-  align-self: flex-center;
+.create-button {
   margin: 20px;
 }
 
-/* label,
-input {
-  display: block;
-} */
-
-.create-form label {
-  margin-bottom: 20px;
+.create-form input {
+  margin-bottom: 15px;
+  margin-top: 3px;
 }
 
-.card {
+.create-form select {
+  margin-bottom: 15px;
+  margin-top: 3px;
+}
+
+/* .card {
   padding: 2em;
-}
+} */
 
 .image-select {
   height: 150px;
@@ -72,24 +87,24 @@ input {
 /* GALLERY -*/
 
 .project-list-item {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   padding: 30px;
   border-radius: 20px;
 }
 .project-list-item:nth-child(1n) {
-  background-color: rgb(192, 157, 225);
+  background-color: var(--light-orange);
 }
 .project-list-item:nth-child(2n) {
-  background-color: rgb(249, 149, 179);
+  background-color: var(--palest-purple);
 }
 .project-list-item:nth-child(3n) {
-  background-color: rgb(247, 249, 149);
+  background-color: var(--light-purple);
 }
 .project-list-item:nth-child(4n) {
-  background-color: rgb(192, 246, 178);
+  background-color: var(--palest-pink);
 }
 
 /* 
@@ -98,6 +113,7 @@ input {
 /*GALLERY - PROJECT CARD */
 
 .project-image {
+  margin-bottom: 10px;
   height: 300px;
   width: 300px;
   border-radius: 20px;
@@ -121,43 +137,76 @@ li {
 }
 
 /* GALLERY - PROJECT MODAL */
-.modal-title {
+.modal-content {
   display: flex;
-  align-items: center;
+  text-align: center;
+  background-color: var(--palest-pink);
+}
+
+.modal-content h5 {
+  color: #517597;
+  font-weight: bold;
+}
+.project-modal {
+  background-color: #ffe8d4;
+}
+
+.edit-project-form {
+  background-color: #cac4ea;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-items input {
+  margin: 3px 5px 5px 5px;
+  width: auto;
+}
+
+.form-items button {
+  margin: 5px;
+}
+
+.confirm-project-update {
+  padding: 10px;
 }
 
 /*IDEAS*/
 
+.ideas-container {
+  /* background-image: url("./assets/images/craft_tools.jpg"); */
+  border-style: 3px;
+  border-color: var(--bright-pink);
+}
+
 /*IMAGE IDEAS*/
 .image-ideas button {
   margin: 0px 10px 10px 0px;
-  background-color: rgb(219, 249, 249);
+  background-color: var(--palest-pink);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*YOUTUBE IDEAS*/
-.youtube {
-  background-color: aquamarine;
+/*YOUTUBE IDEAS*/ /* .youtube {
   width: 100%;
   height: 700%;
   border-radius: 20%;
   margin: 50px;
-}
+} */
 
 .youtube button {
-  margin: 20px;
+  margin-bottom: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--light-orange);
 }
 
-iframe {
+/* iframe {
   padding-bottom: 0px 30px 30px 30px;
-}
+} */
 
 /* GENERAL */
 .page-header {
   margin-bottom: 20px;
   margin-top: 20px;
-  background-color: #feae67;
+
   padding: 10px;
   border-radius: 10px;
 }

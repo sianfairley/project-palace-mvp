@@ -58,75 +58,77 @@ export default function EditProject({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="edit-project-form">
-      <h6>Edit {project.projectname}</h6>
-      <div>
-        <label>Name: </label>
-        <input
-          name="projectname"
-          value={updatedProject.projectname}
-          placeholder={project.projectname}
-          label="name"
-          onChange={handleChange}
-        ></input>
-      </div>
-      <div>
-        <label>Type: </label>
-        <select
-          label="type"
-          placeholder={project.type}
-          value={updatedProject.type}
-          name="type"
-          onChange={handleChange}
+    <form onSubmit={handleSubmit} className="edit-project-form p-3">
+      <h5>Edit {project.projectname}</h5>
+      <div className="form-items">
+        <div>
+          <label>Name: </label>
+          <input
+            name="projectname"
+            value={updatedProject.projectname}
+            placeholder={project.projectname}
+            label="name"
+            onChange={handleChange}
+          ></input>
+        </div>
+        <div>
+          <label>Type: </label>
+          <select
+            label="type"
+            placeholder={project.type}
+            value={updatedProject.type}
+            name="type"
+            onChange={handleChange}
+          >
+            <option>Paper craft</option>
+            <option>Knitting</option>
+            <option>Sewing</option>
+            <option>Painting and drawing</option>
+            <option>Collage</option>
+            <option>Fimo and clay</option>
+            {/* Option to write own type */}
+          </select>
+        </div>
+        <div>
+          <label>Materials: </label>
+          <input
+            type="text"
+            name="materials"
+            placeholder={project.materials}
+            value={updatedProject.materials}
+            onChange={handleChange}
+          ></input>
+        </div>
+        <div>
+          <label>Description: </label>
+          <input
+            type="text"
+            name="description"
+            value={updatedProject.description}
+            placeholder={project.description}
+            onChange={handleChange}
+          ></input>
+        </div>
+        <div>
+          <label>Image: </label>
+          <input
+            type="text"
+            name="image"
+            value={updatedProject.image}
+            placeholder={project.image}
+            onChange={handleChange}
+          ></input>
+        </div>
+        {ProjectUpdate ? <ConfirmProjectUpdate /> : null}
+        <button className="btn btn-light">Change project</button>
+        <button
+          type="button"
+          className="btn btn-light"
+          onClick={() => setOpenEditProject(false)}
         >
-          <option>Paper craft</option>
-          <option>Knitting</option>
-          <option>Sewing</option>
-          <option>Painting and drawing</option>
-          <option>Collage</option>
-          <option>Fimo and clay</option>
-          {/* Option to write own type */}
-        </select>
+          <IoClose />
+        </button>
       </div>
-      <div>
-        <label>Materials: </label>
-        <input
-          type="text"
-          name="materials"
-          placeholder={project.materials}
-          value={updatedProject.materials}
-          onChange={handleChange}
-        ></input>
-      </div>
-      <div>
-        <label>Description: </label>
-        <input
-          type="text"
-          name="description"
-          value={updatedProject.description}
-          placeholder={project.description}
-          onChange={handleChange}
-        ></input>
-      </div>
-      <div>
-        <label>Image: </label>
-        <input
-          type="text"
-          name="image"
-          value={updatedProject.image}
-          placeholder={project.image}
-          onChange={handleChange}
-        ></input>
-      </div>
-      {ProjectUpdate ? <ConfirmProjectUpdate /> : null}
-      <button className="btn btn-light">Change project</button>
-      <button
-        type="button"
-        className="btn btn-light"
-        onClick={() => setOpenEditProject(false)}
-      >
-        <IoClose />
-      </button>
     </form>
   );
 }
