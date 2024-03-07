@@ -3,6 +3,8 @@ import { IoClose } from "react-icons/io5";
 
 export default function EditForm({
   project,
+  selectedProject,
+  setSelectedProject,
   setProjects,
   editForm,
   setEditForm,
@@ -24,7 +26,6 @@ export default function EditForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEditForm(false);
 
     // fetch - PUT request
     fetch(`/api/projects/update/${project.id}`, {
@@ -43,6 +44,8 @@ export default function EditForm({
       .then((data) => {
         console.log("Project updated:", data);
         setProjects(data);
+
+        setSelectedProject(null);
       })
       .catch((error) => {
         console.log("Error updating project", error);
@@ -128,7 +131,9 @@ export default function EditForm({
                   onChange={handleChange}
                 ></input>
               </div>
-              <button className="btn btn-light">Change project</button>
+              <button className="btn btn-light" type="submit">
+                Change project
+              </button>
             </form>
 
             <div>

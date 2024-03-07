@@ -6,7 +6,8 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
-import EditForm from "./EditForm";
+// import EditForm from "./EditForm";
+import EditProject from "./EditProject";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "../Navbar";
 
@@ -31,22 +32,27 @@ function Gallery({ projects, setProjects }) {
 
   return (
     <div>
-      <Navbar />
-      <ul className="project-list">
-        {projects.map((project) => (
-          <li key={project.id} className="project-list-item">
-            <ProjectCard project={project} setProjects={setProjects} />
-          </li>
-        ))}
-      </ul>
+      <div>
+        <Navbar />
+      </div>
+      <div className="container sm-1 md-3 lg-4">
+        <ul className="project-list">
+          {projects.map((project) => (
+            <li key={project.id} className="project-list-item">
+              <ProjectCard project={project} setProjects={setProjects} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
 function ProjectCard({ project, setProjects }) {
   const [projectModalOpen, setProjectModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [deleteWarning, setDeleteWarning] = useState(false);
-  const [editForm, setEditForm] = useState(false);
+  const [openEditProject, setOpenEditProject] = useState(false);
 
   const toggleFavorite = () => {
     let options = {
@@ -83,11 +89,13 @@ function ProjectCard({ project, setProjects }) {
   };
 
   const openProjectModal = () => {
+    setSelectedProject(project);
     setProjectModalOpen(true);
   };
 
-  const openEditForm = () => {
-    setEditForm(true);
+  const viewEditProject = () => {
+    setSelectedProject(project);
+    setOpenEditProject(!openEditProject);
   };
 
   return (
@@ -113,22 +121,15 @@ function ProjectCard({ project, setProjects }) {
         </button>
 
         <button
-          onClick={openEditForm}
-          type="button"
-          className="btn btn-light"
-          data-toggle="modal"
-          data-target="#editForm"
+          onClick={viewEditProject}
+          // type="button"
+          // className="btn btn-light"
+          // data-toggle="modal"
+          // data-target="#editForm"
         >
-          <MdEdit />
+          {openEditProject ? <MdEdit style={{ color: "red" }} /> : <MdEdit />}
         </button>
-        {editForm && (
-          <EditForm
-            project={project}
-            setProjects={setProjects}
-            editForm={editForm}
-            setEditForm={setEditForm}
-          />
-        )}
+
         <button onClick={() => setDeleteWarning(true)}>
           <FaRegTrashAlt />
         </button>
@@ -158,6 +159,16 @@ function ProjectCard({ project, setProjects }) {
       </button>
       {projectModalOpen && (
         <ProjectModal project={project} setProjects={setProjects} />
+      )}
+      {openEditProject && (
+        <EditProject
+          project={project}
+          setProjects={setProjects}
+          openEditProject={openEditProject}
+          setOpenEditProject={setOpenEditProject}
+          selectedProject={selectedProject}
+          setSelectedProject={setSelectedProject}
+        />
       )}
     </div>
   );

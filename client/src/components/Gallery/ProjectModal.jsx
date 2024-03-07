@@ -20,7 +20,7 @@ export default function ProjectModal({ project }) {
             </h5>
           </div>
           <div className="modal-body">
-            <img className="image-gallery" src={project.image} />
+            <img className="project-image" src={project.image} />
             <ul>
               <li>{project.type}</li>
               <li>{project.description}</li>

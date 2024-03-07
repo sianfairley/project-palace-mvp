@@ -6,21 +6,6 @@
   font-family: ;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 button {
   margin: 20px;
 }
@@ -133,6 +118,12 @@ li {
   align-items: start;
   justify-content: center;
   margin-bottom: auto;
+}
+
+/* GALLERY - PROJECT MODAL */
+.modal-title {
+  display: flex;
+  align-items: center;
 }
 
 /*IDEAS*/

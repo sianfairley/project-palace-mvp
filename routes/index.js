@@ -99,9 +99,7 @@ router.put("/projects/update/:id", async (req, res) => {
     const getUpdatedProject = await db(
       `SELECT * FROM projects WHERE id = ${updatedProjectId}`
     );
-    res.status(200).json(getUpdatedProject.data[0]);
 
-    console.log(getUpdatedProject.data);
     selectAllItems(req, res);
   } catch (err) {
     res.status(500).send(err);

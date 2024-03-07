@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { IoClose } from "react-icons/io5";
 
-export default function EditBox({ project, setProjects }) {
+export default function EditProject({
+  project,
+  setProjects,
+  setOpenEditProject,
+}) {
   const [updatedProject, setUpdatedProject] = useState({
     projectname: project.projectname,
     type: project.type,
@@ -8,6 +13,7 @@ export default function EditBox({ project, setProjects }) {
     description: project.description,
     image: project.image,
   });
+  const [ProjectUpdate, SetProjectUpdate] = useState(false);
 
   const handleChange = (e) => {
     setUpdatedProject({
@@ -16,12 +22,16 @@ export default function EditBox({ project, setProjects }) {
     });
   };
 
+  function ConfirmProjectUpdate() {
+    return (
+      <div className="confirm-project-update">
+        <h5>Project updated!</h5>
+      </div>
+    );
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedProject = {
-      ...project,
-      ...updatedProject,
-    };
 
     // fetch - PUT request
     fetch(`/api/projects/update/${project.id}`, {
@@ -40,6 +50,7 @@ export default function EditBox({ project, setProjects }) {
       .then((data) => {
         console.log("Project updated:", data);
         setProjects(data);
+        SetProjectUpdate(true);
       })
       .catch((error) => {
         console.log("Error updating project", error);
@@ -47,9 +58,10 @@ export default function EditBox({ project, setProjects }) {
   };
 
   return (
-    <form onSubmit={() => handleSubmit()}>
+    <form onSubmit={handleSubmit} className="edit-project-form">
       <h6>Edit {project.projectname}</h6>
       <div>
+        <label>Name: </label>
         <input
           name="projectname"
           value={updatedProject.projectname}
@@ -59,6 +71,7 @@ export default function EditBox({ project, setProjects }) {
         ></input>
       </div>
       <div>
+        <label>Type: </label>
         <select
           label="type"
           placeholder={project.type}
@@ -76,6 +89,7 @@ export default function EditBox({ project, setProjects }) {
         </select>
       </div>
       <div>
+        <label>Materials: </label>
         <input
           type="text"
           name="materials"
@@ -85,6 +99,7 @@ export default function EditBox({ project, setProjects }) {
         ></input>
       </div>
       <div>
+        <label>Description: </label>
         <input
           type="text"
           name="description"
@@ -94,6 +109,7 @@ export default function EditBox({ project, setProjects }) {
         ></input>
       </div>
       <div>
+        <label>Image: </label>
         <input
           type="text"
           name="image"
@@ -102,7 +118,15 @@ export default function EditBox({ project, setProjects }) {
           onChange={handleChange}
         ></input>
       </div>
+      {ProjectUpdate ? <ConfirmProjectUpdate /> : null}
       <button className="btn btn-light">Change project</button>
+      <button
+        type="button"
+        className="btn btn-light"
+        onClick={() => setOpenEditProject(false)}
+      >
+        <IoClose />
+      </button>
     </form>
   );
 }
