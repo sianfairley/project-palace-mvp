@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function ProjectModal({ project }) {
+export default function ProjectModal({ project, setProjectModalOpen }) {
   //Create modal to show project info
   return (
     <div
@@ -22,15 +22,31 @@ export default function ProjectModal({ project }) {
           <div className="modal-body">
             <img className="project-image" src={project.image} />
             <ul>
-              <li>{project.type}</li>
-              <li>{project.description}</li>
-              <li>{project.materials}</li>
+              <li>
+                <p>
+                  <h5>Type</h5>
+                  {project.type}
+                </p>
+              </li>
+              <li>
+                <p>
+                  <h5>Description</h5>
+                  {project.description}
+                </p>
+              </li>
+              <li>
+                <p>
+                  <h5>Materials</h5>
+                  {project.materials}
+                </p>
+              </li>
             </ul>
             <div>
               <button
                 type="button"
                 className="btn btn-light"
                 data-dismiss="modal"
+                onClick={() => setProjectModalOpen(false)}
               >
                 <IoClose />
               </button>

@@ -25,11 +25,13 @@ export default function ImageIdeas() {
   };
 
   return (
-    <div className="image-ideas">
-      <button onClick={() => handleFetch("sewing%20craft")}>Sew 🧵</button>
-      <button onClick={() => handleFetch("knitting")}>Knit 🧶</button>
-      <button onClick={() => handleFetch("origami")}>Paper craft ✂️ </button>
-      <button onClick={() => handleFetch("painting")}>Paint 🖌️</button>
+    <div className="image-ideas-container">
+      <div className="image-buttons">
+        <button onClick={() => handleFetch("sewing%20craft")}>Sew 🧵</button>
+        <button onClick={() => handleFetch("knitting")}>Knit 🧶</button>
+        <button onClick={() => handleFetch("origami")}>Paper craft ✂️ </button>
+        <button onClick={() => handleFetch("painting")}>Paint 🖌️</button>
+      </div>
       <div>
         {image.urls && image.urls.small && (
           <img

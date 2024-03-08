@@ -93,6 +93,7 @@ export default function EditProject({
           <label>Materials: </label>
           <input
             type="text"
+            size="auto"
             name="materials"
             placeholder={project.materials}
             value={updatedProject.materials}
@@ -120,7 +121,7 @@ export default function EditProject({
           ></input>
         </div>
         {ProjectUpdate ? <ConfirmProjectUpdate /> : null}
-        <button className="btn btn-light">Change project</button>
+        <button className="btn btn-light ">Change project</button>
         <button
           type="button"
           className="btn btn-light"

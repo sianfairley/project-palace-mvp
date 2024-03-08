@@ -30,20 +30,22 @@ export default function YoutubeIdeas() {
       });
   };
   return (
-    <div className="youtube">
-      <button onClick={handleYoutubeFetch}>Find a craft video 🎬</button>
-      <div>
-        {videoId && (
+    <div className="youtube-container">
+      <div className="youtube-buttons">
+        <button onClick={handleYoutubeFetch}>Find a craft video 🎬</button>
+      </div>
+      <div className="video-container">
+        {videoId ? (
           <iframe
             width="560"
             height="315"
-            src={`https://www.youtube.com/embed/${videoId}?start=103`}
+            src={`https://www.youtube.com/embed/${videoId}?start=0`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-        )}
+        ) : null}
       </div>
     </div>
   );

@@ -34,11 +34,11 @@ export default function Ideas() {
       <div className="container ideas-container">
         <div className="row justify-content-center">
           <div className="col col-lg-6 p-5">
-            <ImageIdeas className="image-ideas" />
+            <ImageIdeas />
           </div>
 
           <div className="col col-lg-6 p-5">
-            <YoutubeIdeas className="youtube-ideas" />
+            <YoutubeIdeas />
           </div>
         </div>
       </div>

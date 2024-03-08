@@ -9,6 +9,7 @@
   --light-purple: #b3b3fb;
   --mid-purple: #aba8ef;
   --dark-purple: #4d4670;
+  --lightest-orange: #f9c693;
   --light-orange: #f6ae64;
   --dark-orange: #f49f44;
   --palest-pink: #dcb9e3;
@@ -48,16 +49,15 @@ button {
 .create-form {
   display: flex;
   flex-direction: column;
-  height: 550px;
-  width: 550px;
-  padding-top: 50px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
   text-align: center;
-  justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
-  padding: 20px;
   background-color: var(--palest-pink);
-  border-radius: 40% 20% 70% 30%;
+  border-radius: 200% 100% 400% 400%;
 }
 
 .create-button {
@@ -74,10 +74,6 @@ button {
   margin-top: 3px;
 }
 
-/* .card {
-  padding: 2em;
-} */
-
 .image-select {
   height: 150px;
   width: 150px;
@@ -87,15 +83,11 @@ button {
 /* GALLERY -*/
 
 .project-list-item {
-  /* display: flex;
-  align-items: center; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 30px;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 .project-list-item:nth-child(1n) {
-  background-color: var(--light-orange);
+  background-color: var(--lightest-orange);
 }
 .project-list-item:nth-child(2n) {
   background-color: var(--palest-purple);
@@ -113,9 +105,10 @@ button {
 /*GALLERY - PROJECT CARD */
 
 .project-image {
-  margin-bottom: 10px;
-  height: 300px;
-  width: 300px;
+  /* margin-bottom: 20px;
+  margin-top: 10px; */
+  max-height: auto;
+  width: 100%;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -124,8 +117,8 @@ li {
   list-style: none;
 }
 
-.project-card button {
-  margin: 5px 1px;
+.button-container button {
+  margin-right: 3px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -133,7 +126,7 @@ li {
   display: flex;
   align-items: start;
   justify-content: center;
-  margin-bottom: auto;
+  margin: 10px 0px 20px 0px;
 }
 
 /* GALLERY - PROJECT MODAL */
@@ -149,17 +142,27 @@ li {
 }
 .project-modal {
   background-color: #ffe8d4;
+  font-size: 16px;
 }
 
 .edit-project-form {
   background-color: #cac4ea;
+  margin-top: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-items input {
-  margin: 3px 5px 5px 5px;
-  width: auto;
+.change-project-button {
+  background-color: lightgrey;
+  color: #517597;
+}
+
+.edit-project-form input[type="text"],
+textarea {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .form-items button {
@@ -172,34 +175,54 @@ li {
 
 /*IDEAS*/
 
-.ideas-container {
+/*IMAGE IDEAS*/
+
+.image-ideas-container {
   /* background-image: url("./assets/images/craft_tools.jpg"); */
-  border-style: 3px;
-  border-color: var(--bright-pink);
+  position: relative;
 }
 
-/*IMAGE IDEAS*/
-.image-ideas button {
+.image-buttons {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.image-buttons button {
   margin: 0px 10px 10px 0px;
   background-color: var(--palest-pink);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*YOUTUBE IDEAS*/ /* .youtube {
-  width: 100%;
-  height: 700%;
-  border-radius: 20%;
-  margin: 50px;
-} */
+.image-ideas {
+  background-color: #cac4ea;
+}
+/*YOUTUBE IDEAS*/
 
-.youtube button {
-  margin-bottom: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: var(--light-orange);
+.youtube-container {
+  position: relative;
 }
 
-/* iframe {
-  padding-bottom: 0px 30px 30px 30px;
+.youtube-buttons {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.youtube-buttons button {
+  margin: 0px 10px 10px 0px;
+  background-color: var(--mid-purple);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+}
+/* .video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 } */
 
 /* GENERAL */

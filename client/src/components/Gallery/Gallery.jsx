@@ -6,7 +6,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 import DeleteProjectButton from "./DeleteProject";
 import ProjectModal from "./ProjectModal";
-import SearchProjects from "./SearchProjects";
+// import SearchProjects from "./SearchProjects";
 import EditProject from "./EditProject";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "../Navbar";
@@ -35,30 +35,18 @@ function Gallery({ projects, setProjects }) {
       <div>
         <Navbar />
       </div>
-      <div>
+      {/* <div>
         <SearchProjects />
-      </div>
-      {/* <div className="container sm-1 md-3 lg-4">
-        <ul className="project-list">
-          {projects.map((project) => (
-            <li key={project.id} className="project-list-item">
-              <ProjectCard project={project} setProjects={setProjects} />
-            </li>
-          ))}
-        </ul>
       </div> */}
-      <div className="container">
-        <div className="row">
+      <h3 className="page-header">My Projects</h3>
+      <div className="container overflow-hidden">
+        <div className="row justify-content-center">
           {projects.map((project) => (
             <div
               key={project.id}
-              className="col-lg-4 col-md-6 project-list-item m-2"
+              className="project-list-item col col-sm-12 col-md-6 col-lg-3 p-3 m-1"
             >
-              <ProjectCard
-                project={project}
-                setProjects={setProjects}
-                className="project-card"
-              />
+              <ProjectCard project={project} setProjects={setProjects} />
             </div>
           ))}
         </div>
@@ -114,6 +102,7 @@ function ProjectCard({ project, setProjects }) {
 
   const viewEditProject = () => {
     setSelectedProject(project);
+    setDeleteWarning(false);
     setOpenEditProject(!openEditProject);
   };
 
@@ -128,34 +117,45 @@ function ProjectCard({ project, setProjects }) {
           {project.favorite ? (
             <MdFavorite style={{ color: "var(--bright-pink)" }} />
           ) : (
-            <MdFavoriteBorder />
+            <MdFavoriteBorder style={{ color: "#dadada" }} />
           )}
         </button>
         <button onClick={(e) => toggleComplete(project.id)}>
           {project.complete ? (
-            <FaRegCircleCheck style={{ color: "var(--bright-pink)" }} />
+            <FaRegCircleCheck style={{ color: "#399E5A" }} />
           ) : (
-            <FaRegCircleCheck />
+            <FaRegCircleCheck style={{ color: "#dadada" }} />
+          )}
+        </button>
+
+        <button onClick={viewEditProject}>
+          {openEditProject ? (
+            <MdEdit style={{ color: "var(--mid-purple)" }} />
+          ) : (
+            <MdEdit style={{ color: "var(--grey-blue)" }} />
           )}
         </button>
 
         <button
-          onClick={viewEditProject}
-          // type="button"
-          // className="btn btn-light"
-          // data-toggle="modal"
-          // data-target="#editForm"
+          onClick={() => {
+            setDeleteWarning(true);
+            setOpenEditProject(false);
+          }}
         >
-          {openEditProject ? (
-            <MdEdit style={{ color: "var(--mid-purple)" }} />
-          ) : (
-            <MdEdit style={{ color: "var(--dark-purple)" }} />
-          )}
+          <FaRegTrashAlt style={{ color: "var(--grey-blue)" }} />
         </button>
+      </div>
 
-        <button onClick={() => setDeleteWarning(true)}>
-          <FaRegTrashAlt />
-        </button>
+      <button
+        onClick={openProjectModal}
+        // type="button"
+        // className="btn btn-light"
+        data-toggle="modal"
+        data-target="#projectModal"
+      >
+        <FaRegEye style={{ color: "var(--grey-blue)" }} />
+      </button>
+      <div>
         {deleteWarning && (
           <div className="alert alert-success mt-3" role="alert">
             <h5>Delete project?</h5>
@@ -170,18 +170,12 @@ function ProjectCard({ project, setProjects }) {
           </div>
         )}
       </div>
-
-      <button
-        onClick={openProjectModal}
-        type="button"
-        className="btn btn-light"
-        data-toggle="modal"
-        data-target="#projectModal"
-      >
-        <FaRegEye />
-      </button>
       {projectModalOpen && (
-        <ProjectModal project={project} setProjects={setProjects} />
+        <ProjectModal
+          project={project}
+          setProjects={setProjects}
+          setProjectModalOpen={setProjectModalOpen}
+        />
       )}
       {openEditProject && (
         <EditProject

@@ -60,73 +60,76 @@ function Create({ setProjects }) {
 
   return (
     <>
-      <Navbar />
-      <h2 className="page-header">Create a new project</h2>
-      <form onSubmit={handleSubmitProject} className="create-form">
-        <div>
-          <h5>1. Give your project a name</h5>
-          <input
-            type="text"
-            label="project name"
-            value={input.projectname}
-            name="projectname"
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <h5>2. Choose a craft</h5>
-          <select
-            label="type"
-            value={input.type}
-            onChange={handleChange}
-            name="type"
-          >
-            <option>-Choose a type-</option>
-            <option>Paper craft</option>
-            <option>Knitting</option>
-            <option>Crochet</option>
-            <option>Sewing</option>
-            <option>Painting and drawing</option>
-            <option>Collage</option>
-            <option>Fimo and clay</option>
-            {/* Option to write own type */}
-          </select>
-        </div>
-        <div>
-          <h5>3. What are your materials?</h5>
-          <input
-            type="text"
-            label="materials"
-            name="materials"
-            value={input.materials}
-            onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <h5>4. Describe your project</h5>
-          <input
-            type="text"
-            label="description"
-            name="description"
-            value={input.description}
-            onChange={handleChange}
-          ></input>
-        </div>
-        {/* Is it possible to map through preset images and insert as component? */}
-        <div>
-          <h5>5. Add an image</h5>
+      <div className="container">
+        <Navbar />
+        <h2 className="page-header">Create a new project</h2>
 
-          <input
-            type="text"
-            label="image url"
-            placeholder="image url"
-            name="image"
-            value={input.image}
-            onChange={handleChange}
-          ></input>
-          {/* <h5>or choose one</h5> */}
-          {/* //Make sure no buttons are selected on load */}
-          {/* <label>
+        <div className="row create-form justify-content-center">
+          <form onSubmit={handleSubmitProject}>
+            <div>
+              <h5>1. Give your project a name</h5>
+              <input
+                type="text"
+                label="project name"
+                value={input.projectname}
+                name="projectname"
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div>
+              <h5>2. Choose a craft</h5>
+              <select
+                label="type"
+                value={input.type}
+                onChange={handleChange}
+                name="type"
+              >
+                <option>-Choose a type-</option>
+                <option>Paper craft</option>
+                <option>Knitting</option>
+                <option>Crochet</option>
+                <option>Sewing</option>
+                <option>Painting and drawing</option>
+                <option>Collage</option>
+                <option>Fimo and clay</option>
+                {/* Option to write own type */}
+              </select>
+            </div>
+            <div>
+              <h5>3. What are your materials?</h5>
+              <input
+                type="text"
+                label="materials"
+                name="materials"
+                value={input.materials}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <div>
+              <h5>4. Describe your project</h5>
+              <input
+                type="text"
+                label="description"
+                name="description"
+                value={input.description}
+                onChange={handleChange}
+              ></input>
+            </div>
+            {/* Is it possible to map through preset images and insert as component? */}
+            <div>
+              <h5>5. Add an image</h5>
+
+              <input
+                type="text"
+                label="image url"
+                placeholder="image url"
+                name="image"
+                value={input.image}
+                onChange={handleChange}
+              ></input>
+              {/* <h5>or choose one</h5> */}
+              {/* //Make sure no buttons are selected on load */}
+              {/* <label>
                 <input type="radio" id="image1" name="presetImage" />
                 <img
                   className="image-select"
@@ -148,11 +151,13 @@ function Create({ setProjects }) {
                   alt="Scrapbooking"
                 />
               </label> */}
+            </div>
+            <button type="submit" className="btn btn-light create-button">
+              Create!🎨
+            </button>
+          </form>
         </div>
-        <button type="submit" className="btn btn-light create-button">
-          Create!🎨
-        </button>
-      </form>
+      </div>
     </>
   );
 }
